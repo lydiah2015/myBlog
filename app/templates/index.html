@@ -1,0 +1,46 @@
+{% extends "bootstrap/base.html" %}
+<head>
+    {% block head %}
+        {{super()}}
+        <title> {% if title %} {{title}} {% else %} Blog {% endif %} </title>
+    {% endblock %}
+
+    {% block styles %}
+        {{super()}}
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% endblock %}
+</head>
+
+<body>
+    {% block navbar %}
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" href="/">My Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav navbar-nav ml-auto">
+                {% if not current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('auth.login')}}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('auth.register')}}">Register</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('auth.profile')}}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    {% endblock %}
+
+    {% block content %}
+    
+    {% endblock %}
+</body>
