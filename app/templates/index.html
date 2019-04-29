@@ -1,33 +1,26 @@
-{% extends './base.html' %}
+{% extends 'base.html' %}
 {% block content %}
     <div class="container">
-        <div class="panel-group">
-            <div class="panel panel-info">
-                <div class="panel-heading  animate">
-                    <h4 class="panel-title">
-                        Blogs
-                    </h4>
-                    {% if current_user.is_authenticated %}
-                    <div class="container">
-                        <a class="btn btn-primary" href="">+ Add Blog</a>
-                    </div>
-                    {% endif %}
-                </div>
-                <div class="panel-body">
-                    <div class="card-columns">
-                        {% for blog in blogs %}
-                        <div class="card">
-                            <div class="card-header">
-                                <a href="/blog/{{blog.id}}">
-                                    <h2>{{blog.title}}</h2>
-                                </a>
-                            </div>
-                            <div class="card-body">{{blog.text[:64]}}</div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-
+        <h1 class="page-header">
+            Blogs
+        </h1>
+        {% if current_user.writer %}
+        <a href="#" class="btn btn-primary">Add blog</a>
+        {% endif %}
+    </div>
+    <div class="container">
+        {% if blogs %}
+        {% for blog in blogs %}
+        <div class="card">
+            <h5 class="card-header">Blog</h5>
+            <div class="card-body">
+                <h5 class="card-title">{{blog.title}}</h5>
+                <p class="card-text">{{blog.text[:64]}}</p>
+                <a href="#" class="btn btn-primary">See blog</a>
             </div>
         </div>
+        {% endfor %}
+        {% else %}
+        <h4>No blog yet !!</h4>
+        {% endif %}
 {% endblock %}
