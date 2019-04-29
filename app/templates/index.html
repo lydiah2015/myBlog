@@ -1,46 +1,33 @@
-{% extends "bootstrap/base.html" %}
-<head>
-    {% block head %}
-        {{super()}}
-        <title> {% if title %} {{title}} {% else %} Blog {% endif %} </title>
-    {% endblock %}
+{% extends './base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel-heading  animate">
+                    <h4 class="panel-title">
+                        Blogs
+                    </h4>
+                    {% if current_user.is_authenticated %}
+                    <div class="container">
+                        <a class="btn btn-primary" href="">+ Add Blog</a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="panel-body">
+                    <div class="card-columns">
+                        {% for blog in blogs %}
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="/blog/{{blog.id}}">
+                                    <h2>{{blog.title}}</h2>
+                                </a>
+                            </div>
+                            <div class="card-body">{{blog.text[:64]}}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
 
-    {% block styles %}
-        {{super()}}
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    {% endblock %}
-</head>
-
-<body>
-    {% block navbar %}
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="/">My Blog</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="nav navbar-nav ml-auto">
-                {% if not current_user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('auth.login')}}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('auth.register')}}">Register</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('auth.profile')}}">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
-                    </li>
-                {% endif %}
-            </ul>
+            </div>
         </div>
-    </nav>
-    {% endblock %}
-
-    {% block content %}
-    
-    {% endblock %}
-</body>
+{% endblock %}
