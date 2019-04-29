@@ -1,5 +1,5 @@
 import requests
-def get_quotes():
+def get_quote():
     url = "http://quotes.stormconsultancy.co.uk/random.json"
     res = requests.get(url)
     if res.status_code == 200:
