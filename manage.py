@@ -20,7 +20,7 @@ def test():
 def create_writer():
     from config import Config
     try:
-        u=User(username=Config.WRITER_USERNAME,passwd=Config.WRITER_PASSWORD)
+        u=User(username=Config.WRITER_USERNAME,passwd=Config.WRITER_PASSWORD,writer=True)
         db.session.add(u)
         db.session.commit()
     except Exception as e:

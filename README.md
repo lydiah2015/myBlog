@@ -32,12 +32,12 @@ pip install -r requirements.txt
 
 ### Running Tests
 ```bash
-python run.py test
+python manage.py test
 ```
 
 ### Running in development
 ```bash
-python run.py runserver
+python manage.py runserver
 ```
 Open the app on your browser, by default on `127.0.0.1:5000`.
 
@@ -64,7 +64,7 @@ git push heroku master
 ```
 - upgrade db to create tables on production database
 ```bash
-heroku run python run.py db upgrade
+heroku run python manage.py db upgrade
 ```
 
 ## Live Demo
