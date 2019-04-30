@@ -4,6 +4,7 @@ from flask_migrate import Migrate,MigrateCommand
 from app.models import User,Post,Comment
 
 app=create_app("development")
+
 manager=Manager(app)
 manager.add_command("runserver",Server(use_debugger=True))
 migrate=Migrate(app,db)
