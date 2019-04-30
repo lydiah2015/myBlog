@@ -41,6 +41,15 @@
     {% endblock %}
 
     {% block content %}
+
+    <div class="container fixed-bottom">
+            {% if quote %}
+            <blockquote class="wp-block-quote">
+                <p>{{quote.quote}}</p>
+                <cite>{{quote.author}}</cite>
+            </blockquote>
+            {% endif %}
+    </div>
     
     {% endblock %}
 </body>
