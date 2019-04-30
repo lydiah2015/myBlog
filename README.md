@@ -70,7 +70,7 @@ heroku run python manage.py db upgrade
 ## Live Demo
 
 The web app can be accessed from the following link
-[https://lydiah-blog.herokuapp.com/](https://lydiah-blog.herokuapp.com/)
+[https://elleblog.herokuapp.com/](https://elleblog.herokuapp.com/)
 
 ## Technology used
 
