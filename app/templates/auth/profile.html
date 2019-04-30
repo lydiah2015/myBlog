@@ -1,0 +1,37 @@
+{% extends './base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h2>Profile</h2>
+        </div>
+        <div class="container">
+            <p>Username: {{current_user.username}}</p>
+            <p>Email: {{current_user.email}}</p>
+        </div>
+        {% if current_user.writer %}
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel-heading  animate">
+                <h4 class="panel-title">
+                    <span>My Blogs (<span id="postcount">{{current_user.posts.count()}}</span>)</span>
+                </h4>
+                </div>
+                <div class="panel-body">
+                    <div class="card-columns">
+                        {% for post in current_user.posts.all() %}
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="/blog/{{post.id}}">
+                                    {{post.title}}
+                                </a>
+                            </div>
+                            <div class="card-body">{{post.text[:256]}}...</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% endif %}
+{% endblock %}
