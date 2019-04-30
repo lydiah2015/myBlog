@@ -15,5 +15,15 @@ def test():
     tests= unittest.TestLoader().discover('tests')
     unittest.TextTestRunner().run(tests)
 
+@manager.command
+def create_writer():
+    from config import Config
+    try:
+        u=User(username=Config.WRITER_USERNAME,passwd=Config.WRITER_PASSWORD)
+        db.session.add(u)
+        db.session.commit()
+    except Exception as e:
+        pass
+
 if __name__=="__main__":
     manager.run()
