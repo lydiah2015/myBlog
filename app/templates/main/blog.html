@@ -60,6 +60,11 @@
                         Posted by {{comment.user.username}} on {{comment.created_at.date()}}
                     </div>
                     <div class="card-body">{{comment.text}}</div>
+                    {% if current_user.writer %}
+                    <div class="card-footer">
+                        <a href="/comment/delete/{{comment.id}}" class="card-link">Delete</a>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
