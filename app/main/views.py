@@ -3,11 +3,12 @@ from flask_login import current_user,login_required
 from . import main
 from .forms import BlogForm, CommentForm
 from app.models import Post
+from app.request_handle import get_quote
 
 @main.route("/",methods=["GET","POST"])
 def index():
     blogs=Post.query.all()
-    return render_template('index.html',blogs=blogs)
+    return render_template('index.html',blogs=blogs,quote=get_quote())
 
 @main.route("/add_blog",methods=["GET","POST"])
 @login_required
@@ -21,4 +22,4 @@ def add_blog():
         )
         blog.save()
         return redirect(url_for("main.index"))
-    return render_template('./main/add_blog.html',blog_form=blog_form)
+    return render_template('./main/add_blog.html',blog_form=blog_form,quote=get_quote())

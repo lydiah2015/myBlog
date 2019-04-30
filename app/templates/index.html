@@ -6,7 +6,7 @@
             Blogs
         </h1>
         {% if current_user.writer %}
-        <a href="#" class="btn btn-primary">Add blog</a>
+        <a href="/add_blog" class="btn btn-primary" style="margin-bottom:30px">Add blog</a>
         {% endif %}
     </div>
     <div class="container">
@@ -16,7 +16,7 @@
             <h5 class="card-header">Blog</h5>
             <div class="card-body">
                 <h5 class="card-title">{{blog.title}}</h5>
-                <p class="card-text">{{blog.text[:64]}}</p>
+                <p class="card-text">{{blog.text[:256]}}...</p>
                 <a href="#" class="btn btn-primary">See blog</a>
             </div>
         </div>
