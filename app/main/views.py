@@ -1,4 +1,4 @@
-from flask import render_template,redirect, url_for
+from flask import render_template,redirect, url_for,request
 from flask_login import current_user,login_required
 from . import main
 from .forms import BlogForm, CommentForm
@@ -51,3 +51,23 @@ def delete_comment(comment_id):
     db.session.commit()
     return redirect(url_for("main.blog",blog_id=blog_id))
 
+@main.route("/blog/delete/<int:blog_id>")
+def delete_blog(blog_id):
+    blog=Post.query.filter_by(id=blog_id).first()
+    db.session.delete(blog)
+    db.session.commit()
+    return redirect(url_for("main.index"))
+
+
+@main.route("/blog/edit/<int:blog_id>",methods=["GET","POST"])
+def edit_blog(blog_id):
+    post=Post.query.filter_by(id=blog_id).first()
+    blog_form=BlogForm()
+    if request.method=="POST" and blog_form.validate_on_submit():
+        post.title=blog_form.title.data
+        post.text=blog_form.blog.data
+        db.session.commit()
+        return redirect(url_for("main.index"))
+    blog_form.title.data=post.title
+    blog_form.blog.data=post.text
+    return render_template('./main/edit_blog.html',blog_form=blog_form,quote=get_quote())

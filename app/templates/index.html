@@ -19,6 +19,12 @@
                 <p class="card-text">{{blog.text[:256]}}...</p>
                 <a href="/blog/{{blog.id}}" class="btn btn-primary">See blog</a>
             </div>
+            {% if current_user.writer %}
+            <div class="card-footer">
+                <a href="/blog/delete/{{blog.id}}" class="card-link">Delete</a>
+                <a href="/blog/edit/{{blog.id}}" class="card-link">Edit</a>
+            </div>
+            {% endif %}
         </div>
         {% endfor %}
         {% else %}
